@@ -37,7 +37,7 @@ def calc(num):
     return list(map(auxCalc, num))
 
 def auxCalc(n):
-    return ((3 * n * 2) + 2)/(n + 1)
+    return ((3 * n * 2) + 2)/(n + 1) 
 
 #6.Escreva uma função que, dada uma lista de números, retorne uma lista com
 #apenas os que forem negativos. Defina uma função auxiliar para ajudar
