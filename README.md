@@ -1,1 +1,1 @@
-paradigmas
+Repositório de paradigmas
