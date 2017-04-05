@@ -103,3 +103,45 @@ true.                                              %Certo!
    Exit: (8) azulejos(120, 3) ? creep              %Retorno da chamada inicial com o número de quadrados
 A = 3 .                                            %Retorno com sucesso do valor Nq pedido
 ```
+
+Exercício 3. Escolha algum predicado recursivo que esteja nos slides ou em qualquer outra fonte. Faça a execução passo-a-passo de uma consulta com o predicado escolhido. Lembre-se de mostrar o código do predicado no seu arquivo t3parte1.md.
+
+Função recursiva escolhida faz a soma dos termos da lista:
+```prolog
+sum([],0). 
+sum([H|T], S) :- sum(T, S1),   
+                 S is H + S1.
+```
+Trace comentado:
+```
+?- trace.                                               %Chama o trace
+true.                                                   %Certo!
+
+[trace]  ?- sum([3, 5, 6, 2, 9, 4], S).                 %Chama o predicado sum
+   Call: (8) sum([3, 5, 6, 2, 9, 4], _2318) ? creep     %Atribui S a uma variável única 
+   Call: (9) sum([5, 6, 2, 9, 4], _2578) ? creep        %Primeira recursão separando [H|T] e atribui outra variável 
+   Call: (10) sum([6, 2, 9, 4], _2578) ? creep          %Segunda recursão separando [H|T]
+   Call: (11) sum([2, 9, 4], _2578) ? creep             %Terceira recursão separando [H|T]
+   Call: (12) sum([9, 4], _2578) ? creep                %Quarta recursão separando [H|T]
+   Call: (13) sum([4], _2578) ? creep                   %Quinta recursão separando [H|T]
+   Call: (14) sum([], _2578) ? creep                    %Sexta recursão separando [H|T]
+   Exit: (14) sum([], 0) ? creep                        %Retorna pela condição de parada com soma igual a 0
+   Call: (14) _2582 is 4+0 ? creep                      %Faz a soma (4 (valor de H) + 0 (valor retornado da sexta recursão))
+   Exit: (14) 4 is 4+0 ? creep                          %Retorna a soma na variável 
+   Exit: (13) sum([4], 4) ? creep                       %Retorno da função com a soma
+   Call: (13) _2588 is 9+4 ? creep                      %Faz a soma (9 (valor de H) + 4 (valor retornado da quinta recursão))
+   Exit: (13) 13 is 9+4 ? creep                         %Retorna a soma na variável 
+   Exit: (12) sum([9, 4], 13) ? creep                   %Retorno da função com a soma
+   Call: (12) _2594 is 2+13 ? creep                     %Faz a soma (2 (valor de H) + 13 (valor retornado da quarta recursão))
+   Exit: (12) 15 is 2+13 ? creep                        %Retorna a soma na variável 
+   Exit: (11) sum([2, 9, 4], 15) ? creep                %Retorno da função com a soma
+   Call: (11) _2600 is 6+15 ? creep                     %Faz a soma (6 (valor de H) + 15 (valor retornado da terceira recursão))
+   Exit: (11) 21 is 6+15 ? creep                        %Retorna a soma na variável 
+   Exit: (10) sum([6, 2, 9, 4], 21) ? creep             %Retorno da função com a soma
+   Call: (10) _2606 is 5+21 ? creep                     %Faz a soma (5 (valor de H) + 21 (valor retornado da segunda recursão))
+   Exit: (10) 26 is 5+21 ? creep                        %Retorna a soma na variável 
+   Exit: (9) sum([5, 6, 2, 9, 4], 26) ? creep           %Retorno da função com a soma
+   Call: (9) _2318 is 3+26 ? creep                      %Faz a soma (3 (valor de H) + 26 (valor retornado da primeira recursão))
+   Exit: (9) 29 is 3+26 ? creep                         %Retorna a soma na variável 
+   Exit: (8) sum([3, 5, 6, 2, 9, 4], 29) ? creep        %Retorno da função com a soma
+S = 29                                                  %Retorno com sucesso do valor S pedido na chamada
