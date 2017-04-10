@@ -12,4 +12,7 @@ Link para a [disciplina](https://github.com/AndreaInfUFSM/elc117-2017a)
 
 - [Trabalho 1](t1)
 - [Trabalho 2](t2)
+
+#### Prolog:
+
 - [Trabalho 3](t3)
