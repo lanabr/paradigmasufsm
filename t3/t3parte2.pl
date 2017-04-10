@@ -24,7 +24,8 @@ hasN(L,N) :- length(L, M),
 
 %6. Defina um predicado isBin(L) que seja verdadeiro se L for uma lista contendo somente elementos 0 e 1. Use recursão.
 
-isBin([]).
+isBin([1]).
+isBin([0]).
 isBin(L) :- L = [H|T],
             isBin(T),
             member(H, [0, 1]).
