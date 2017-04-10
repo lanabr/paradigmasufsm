@@ -19,19 +19,18 @@ torneio(J, P, R) :- J > 0,
 %Questões:
 
 %Questão 2. Qual o número total da partidas do torneio?
-(A) 63
-(B) 64
-(C) 65
-(D) 127
-(E) 128
+%(A) 63
+%(B) 64
+%(C) 65
+%(D) 127
+%(E) 128
 
-%Questão 3. Quantas rodadas existem, no total, durante
-o torneio?
-(A) 6
-(B) 7
-(C) 8
-(D) 12
-(E) 16
+%Questão 3. Quantas rodadas existem, no total, durante o torneio?
+%(A) 6
+%(B) 7
+%(C) 8
+%(D) 12
+%(E) 16
 
 %As respostas para as consultas correspondentes as questão de acordo com o código são:
 %?- torneio(128, P, R).
