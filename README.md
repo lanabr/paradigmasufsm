@@ -19,4 +19,4 @@ Link para a [disciplina](https://github.com/AndreaInfUFSM/elc117-2017a)
 
 #### Extras:
 
-- [Extra](extra)
+- [Extra](extras)
