@@ -21,6 +21,8 @@ Link para a [disciplina](https://github.com/AndreaInfUFSM/elc117-2017a)
 
 - [Trabalho 4](t4)
 - [Trabalho 5](t5)
+- [Trabalho 6](t6)
+- [Trabalho 7](t7)
 
 #### Extras:
 
