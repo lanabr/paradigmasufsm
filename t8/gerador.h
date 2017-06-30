@@ -1,5 +1,5 @@
-#ifndef trabalho_h
-#define trabalho_h
+#ifndef gerador_h
+#define gerador_h
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Input.H>
