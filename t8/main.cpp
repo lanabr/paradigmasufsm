@@ -148,7 +148,10 @@ public:
   static void cbBtnCreate(Fl_Widget* btn, void* userdata) {
     View* gui = static_cast<View*>(userdata);
 
-    if(gui->browser->size() == 0) fl_alert("Nao ha nenhuma informacao!");
+    if(gui->browser->size() == 0){ 
+        fl_alert("Nao ha nenhuma informacao!");
+        return;
+    }
 
     std::ifstream in("template.html");
     std::ofstream out("index.html");
@@ -163,15 +166,79 @@ public:
         if(cont == 6) {
             for(it = gui->data.begin(); it != gui->data.end(); it++)
                 if(it->getId() == "title") break;
-            //if(it->getId() != "title") fl_alert("Esta faltando alguma informacao!");
 
             out << "<title>" << it->getLabel() << "</title>" << std::endl;
         }else if(cont == 18){
             for(it = gui->data.begin(); it != gui->data.end(); it++)
                 if(it->getId() == "h1") break;
-            //if(it->getId() == "") fl_alert("Esta faltando alguma informacao!");
 
             out << "<h1>" << it->getLabel() << "</h1>" << std::endl;
+        }else if(cont == 32){
+            for(it = gui->data.begin(); it != gui->data.end(); it++){
+                if(it->getId() != "h1" && it->getId() != "title"){
+                    out << "<div class=\"form-group\">" << std::endl;
+                    out << "<label for=\"" << it->getId() << "\" class=\"col-sm-2 control-label\">" << it->getLabel() << "</label>" << std:: endl;
+                    out << "<div class=\"col-sm-6\">" << std::endl;
+                    out << "<input type=\"text\" class=\"form-control validate[required]\" id=\"" << it->getId() << "\" placeholder=\"" << it->getLabel() << "\">" << std::endl;
+                    out << "</div>" << std::endl << "</div>" << std::endl;
+                }
+            }
+        }else if(cont == 84){
+            out << "dataSet[seq]=[index, icons";
+
+            for(it = gui->data.begin(); it != gui->data.end(); it++){
+                if(it->getId() != "h1" && it->getId() != "title"){
+                    out << ", object." << it->getId();
+                }
+            }
+
+            out << "];" << std::endl;
+        }else if(cont == 89){
+            out << "oTable=$('#table').dataTable({" << std::endl;
+            out << "\"data\": dataSet," << std::endl;
+            out << "\"columns\": [" << std::endl;
+            out << "{ \"title\": \"Seq\", \"class\": \"center\" }," << std::endl;
+            out << "{ \"title\": \"\", \"class\": \"center\" }," << std::endl;
+
+            for(it = gui->data.begin(); it != gui->data.end(); it++){
+                if(it->getId() != "h1" && it->getId() != "title"){
+                    out << "{ \"title\": \"" << it->getLabel() << "\"}," << std::endl;
+                }
+            }
+
+            out << "]" << std::endl << "});" << std::endl;
+        }else if(cont == 112){
+            int i = 2;
+
+            out << "$('#table tbody').on( 'click', '.glyphicon-edit', function () {" << std::endl;
+            out << "$('#list').hide();" << std::endl;
+            out << "var rows = $(this).parents('tr').children();" << std::endl;
+            out << "$('#seq').text(rows[0].innerHTML);" << std::endl;
+
+            for(it = gui->data.begin(); it != gui->data.end(); it++){
+                if(it->getId() != "h1" && it->getId() != "title"){
+                    out << "$('#" << it->getId() << "').val(rows[" << i << "].innerHTML);" << std::endl;
+                    i++;
+                }
+            }
+
+            out << "$('#formID').show();" << std::endl << "} );" << std::endl;
+        }else if(cont == 117){
+            out << "function save() {" << std::endl;
+            out << "var seq=$('#seq').text();" << std::endl;
+            out << "if ( isNaN(seq) ) { seq=0; }" << std::endl;
+            out << "var key=formId+\"_\"+seq;" << std::endl;
+            out << "var object={" << std::endl;
+
+            for(it = gui->data.begin(); it != gui->data.end(); it++){
+                if(it->getId() != "h1" && it->getId() != "title"){
+                    out << "\"" << it->getId() << "\":$(\"#"  << it->getId() << "\").val()," << std::endl;
+                }
+            }
+
+            out << "}" << std::endl;
+            out << "localStorage.setItem(key, JSON.stringify(object));" << std::endl;
+            out << "}" << std::endl;
         }else
             out << line << std::endl;;
 
